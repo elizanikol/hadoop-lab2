@@ -1,12 +1,10 @@
 package bdtc.lab2;
 
-import lombok.extern.slf4j.Slf4j;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 
 import static org.apache.spark.sql.functions.*;
 
-//@Slf4j
 /**
  *  Class to calculate average number of messages sent per user of a group.
  *  */
