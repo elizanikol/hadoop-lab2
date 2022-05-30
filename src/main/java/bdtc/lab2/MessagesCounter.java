@@ -16,24 +16,20 @@ public class MessagesCounter {
      *  */
     public static Dataset<Row> countMessages(Dataset<Row> inputDataset, Dataset<Row> config) {
 
-        // join messaging statistics with users groups
-        Dataset<Row> joinedTables = inputDataset.join(config,
-                inputDataset.col("sender").equalTo(config.col("username"))
-        ).select("group", "sender");
+        // count number of messages each user sent
+        Dataset<Row> userMessages = inputDataset.groupBy("sender").count();
 
-        // count the number of messages each user sent
-        Dataset<Row> messagesPerGroup = joinedTables.groupBy("group").count()
-                .withColumnRenamed("count", "count_messages");
+        // join groups and number of messages sent by users
+        Dataset<Row> joinedTables = config.join(userMessages,
+                        userMessages.col("sender").equalTo(config.col("username")),
+                        "left")
+                .na().fill(0)
+                .drop("sender");
 
-        // count the number of users in each group
-        Dataset<Row> usersPerGroup = config.groupBy("group").count()
-                .withColumnRenamed("count", "count_users");
-
-        // for each group calculate the average number of messages sent by its members
-        Dataset<Row> result = usersPerGroup.join(messagesPerGroup, "group")
-                .withColumn("messages_per_user",
-                        round(col("count_messages").divide(col("count_users")), 2))
-                .drop("count_messages", "count_users").sort("group");
+        // calculate average number of messages per user for each group
+        Dataset<Row> result = joinedTables.groupBy("group")
+                .agg(round(avg("count"), 2).alias("messages_per_user"))
+                .sort("group");
 
         result.show();
         return result;
