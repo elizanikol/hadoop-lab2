@@ -42,7 +42,7 @@ Spark SQL (DataFrame, DataSet)
 ## SparkSQLApplication
 
 Результат работы приложения - статистика по группам и среднему количеству переданных сообщений пользователями этих групп:
-<img width="500" alt="Screenshot 2022-05-30 at 02 23 31" src="https://user-images.githubusercontent.com/55412039/170965821-04f28d25-52d5-4d75-9077-3db237c9a552.png">
+<img width="218" alt="Screenshot 2022-05-30 at 02 23 31" src="https://user-images.githubusercontent.com/55412039/170965821-04f28d25-52d5-4d75-9077-3db237c9a552.png">
 
 ## Сборка и запуск
 
