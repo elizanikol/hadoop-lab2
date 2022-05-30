@@ -41,7 +41,12 @@ Spark SQL (DataFrame, DataSet)
 
 ## SparkSQLApplication
 
-Результат работы приложения - статистика по группам и среднему количеству переданных сообщений пользователями этих групп:
+Итоговый сформированный Dataset:
+<img width="1250" alt="Screenshot 2022-05-30 at 13 07 43" src="https://user-images.githubusercontent.com/55412039/170971499-00c20853-32b2-43c5-9105-e303644a8e26.png">
+
+Результат работы приложения - просмотр статистики по группам и среднему количеству переданных сообщений пользователями этих групп, 
+с помощью команды `hadoop fs -cat  hdfs://127.0.0.1:9000/user/root/out/part-*`:
+
 <img width="218" alt="Screenshot 2022-05-30 at 02 23 31" src="https://user-images.githubusercontent.com/55412039/170965821-04f28d25-52d5-4d75-9077-3db237c9a552.png">
 
 ## Сборка и запуск
